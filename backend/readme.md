@@ -14,4 +14,4 @@ Details:
   mongodb+srv://sick:mypassword@sickcluster.axyoc.mongodb.net/sickFits?retryWrites=true&w=majority
 
 - GraphQL playground
-  http://localhost/3000/api/graphql
+  http://localhost/3000/api/graphql (or from KeystoneJS)

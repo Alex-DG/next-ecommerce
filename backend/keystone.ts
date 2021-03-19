@@ -1,4 +1,5 @@
 import { createAuth } from '@keystone-next/auth'
+
 import {
   withItemData,
   statelessSessions,
@@ -8,6 +9,7 @@ import { config, createSchema } from '@keystone-next/keystone/schema'
 import 'dotenv/config'
 
 import { User } from './schemas/User'
+import { Product } from './schemas/Product'
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial'
@@ -17,6 +19,7 @@ const sessionConfig = {
   secret: process.env.COOKIE_SECRET,
 }
 
+// Define how keystone login system will work
 const { withAuth } = createAuth({
   listKey: 'User', // schema responsible for who is signing in
   identityField: 'email', // user will use their email to sign in
@@ -43,6 +46,7 @@ export default withAuth(
     lists: createSchema({
       // Schema items go in here
       User,
+      Product,
     }),
     ui: {
       // TODO: change this for roles
