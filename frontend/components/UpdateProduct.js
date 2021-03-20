@@ -48,19 +48,20 @@ const UpdateProduct = ({ id }) => {
 
   if (loading) return <p>loading...</p>
 
+  const { name, description, price } = inputs
+
   return (
     <Form
       onSubmit={async (e) => {
         e.preventDefault()
-        const res = await updateProduct({
+        await updateProduct({
           variables: {
             id,
-            name: inputs.name,
-            description: inputs.description,
-            price: inputs.price,
+            name,
+            description,
+            price,
           },
         }).catch(console.error)
-        console.log(res)
         // Submit the inputfields to the backend:
         // TODO: Handle Submit!!!
         // const res = await createProduct();
@@ -80,7 +81,7 @@ const UpdateProduct = ({ id }) => {
             id="name"
             name="name"
             placeholder="Name"
-            value={inputs.name}
+            value={name}
             onChange={handleChange}
           />
         </label>
@@ -91,7 +92,7 @@ const UpdateProduct = ({ id }) => {
             id="price"
             name="price"
             placeholder="price"
-            value={inputs.price}
+            value={price}
             onChange={handleChange}
           />
         </label>
@@ -101,7 +102,7 @@ const UpdateProduct = ({ id }) => {
             id="description"
             name="description"
             placeholder="Description"
-            value={inputs.description}
+            value={description}
             onChange={handleChange}
           />
         </label>
