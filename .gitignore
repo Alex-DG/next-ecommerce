@@ -8,3 +8,6 @@ layout.md
 variables.env
 *.env
 .keystone
+.vscode
+*/.vscode
+*/.eslintrc
