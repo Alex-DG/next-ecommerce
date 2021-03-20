@@ -4,6 +4,7 @@ import useForm from '../lib/useForm'
 import ErrorMessage from './ErrorMessage'
 import { ALL_PRODUCTS_QUERY } from './Products'
 import Form from './styles/Form'
+import Router from 'next/router'
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -34,8 +35,7 @@ export default function CreateProduct() {
     description: 'These are the best shoes!',
   })
 
-  // ..., data } = useMutation(...)
-  const [createProduct, { loading, error }] = useMutation(
+  const [createProduct, { loading, error, data }] = useMutation(
     CREATE_PRODUCT_MUTATION,
     {
       variables: inputs,
@@ -43,12 +43,19 @@ export default function CreateProduct() {
     }
   )
 
+  const routerRedirect = () =>
+    Router.push({
+      pathname: `/product/${data.createProduct.id}`,
+    })
+
   return (
     <Form
       onSubmit={async (e) => {
         e.preventDefault()
         await createProduct()
+
         clearForm()
+        routerRedirect()
       }}
     >
       <ErrorMessage {...{ error }} />
