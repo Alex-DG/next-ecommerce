@@ -2,7 +2,6 @@ import React from 'react'
 import ItemStyles from './styles/ItemStyles'
 import Title from './styles/Title'
 import PriceTag from './styles/PriceTag'
-import Router from 'next/router'
 
 import Link from 'next/link'
 import formatMoney from '../lib/formatMoney'
@@ -10,14 +9,8 @@ import formatMoney from '../lib/formatMoney'
 const Product = ({ product }) => {
   const { id, name, price, description } = product
 
-  const handleViewProduct = () => {
-    Router.push({
-      pathname: `/product/${id}`,
-    })
-  }
-
   return (
-    <ItemStyles onClick={handleViewProduct}>
+    <ItemStyles>
       <img
         src={product?.photo?.image?.publicUrlTransformed}
         alt={product?.photo?.altText}
@@ -30,6 +23,19 @@ const Product = ({ product }) => {
       <PriceTag>{formatMoney(price)}</PriceTag>
 
       <p>{description}</p>
+
+      <div className="buttonList">
+        <Link
+          href={{
+            pathname: '/update',
+            query: {
+              id: product.id,
+            },
+          }}
+        >
+          Edit ✏️
+        </Link>
+      </div>
     </ItemStyles>
   )
 }
