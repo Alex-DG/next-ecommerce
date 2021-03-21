@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const PaginationStyles = styled.div`
   text-align: center;
@@ -8,12 +8,12 @@ const PaginationStyles = styled.div`
   justify-content: center;
   align-content: center;
   margin: 2rem 0;
-  border: 1px solid var(--lightGray);
+  border: 1px solid var(--lightGrey);
   border-radius: 10px;
   & > * {
     margin: 0;
     padding: 15px 30px;
-    border-right: 1px solid var(--lightGray);
+    border-right: 1px solid var(--lightGrey);
     &:last-child {
       border-right: 0;
     }
@@ -22,6 +22,6 @@ const PaginationStyles = styled.div`
     color: grey;
     pointer-events: none;
   }
-`;
+`
 
-export default PaginationStyles;
+export default PaginationStyles

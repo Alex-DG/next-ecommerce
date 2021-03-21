@@ -17,7 +17,6 @@ const update = (cache, payload) => {
 }
 
 const DeleteProduct = ({ id, children }) => {
-  console.log(id)
   const [deleteProduct, { loading }] = useMutation(DELETE_PRODUCT_MUTATION, {
     variables: { id },
     update,
