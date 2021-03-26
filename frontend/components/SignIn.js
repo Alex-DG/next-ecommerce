@@ -1,9 +1,9 @@
-import Form from './Form'
-import useForm from '../../lib/useForm'
+import Form from './styles/Form'
+import useForm from '../lib/useForm'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
-import { CURRENT_USER_QUERY } from '../User'
-import ErrorMessage from '../ErrorMessage'
+import { CURRENT_USER_QUERY } from './User'
+import ErrorMessage from './ErrorMessage'
 
 const defaultValues = {
   email: '',
