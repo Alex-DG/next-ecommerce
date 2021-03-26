@@ -47,8 +47,6 @@ const SignIn = () => {
       ? data?.authenticateUserWithPassword
       : undefined
 
-  console.log(error)
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     await signin()
@@ -56,37 +54,40 @@ const SignIn = () => {
   }
 
   return (
-    <Form method="POST" onSubmit={handleSubmit}>
-      <ErrorMessage {...{ error }} />
+    <>
+      <Form method="POST" onSubmit={handleSubmit}>
+        <h2>Sign Into Your Account</h2>
+        <ErrorMessage {...{ error }} />
 
-      <fieldset disabled={loading}>
-        <label htmlFor="email">
-          Email
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email Address"
-            autoComplete="email"
-            value={email}
-            onChange={handleChange}
-          ></input>
-        </label>
+        <fieldset disabled={loading}>
+          <label htmlFor="email">
+            Email
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email Address"
+              autoComplete="email"
+              value={email}
+              onChange={handleChange}
+            ></input>
+          </label>
 
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            autoComplete="password"
-            value={password}
-            onChange={handleChange}
-          ></input>
-        </label>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              autoComplete="password"
+              value={password}
+              onChange={handleChange}
+            ></input>
+          </label>
 
-        <button type="submit">Submit</button>
-      </fieldset>
-    </Form>
+          <button type="submit">Submit</button>
+        </fieldset>
+      </Form>
+    </>
   )
 }
 

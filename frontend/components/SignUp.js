@@ -8,58 +8,62 @@ import ErrorMessage from './ErrorMessage'
 const defaultValues = {
   email: '',
   password: '',
+  name: '',
 }
 
 const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION($email: String!, $password: String!) {
-    authenticateUserWithPassword(email: $email, password: $password) {
-      ... on UserAuthenticationWithPasswordSuccess {
-        item {
-          id
-          email
-          name
-        }
-      }
-      ... on UserAuthenticationWithPasswordFailure {
-        code
-        message
-      }
+  mutation SIGNUP_MUTATION(
+    $name: String!
+    $email: String!
+    $password: String!
+  ) {
+    createUser(data: { name: $name, email: $email, password: $password }) {
+      id
+      email
+      name
     }
   }
 `
 
 const SignUp = () => {
   const { inputs, handleChange, resetForm } = useForm(defaultValues)
-  const { email, password } = inputs
+  const { email, password, name } = inputs
 
-  const [signin, { data, loading }] = useMutation(SIGNUP_MUTATION, {
-    variables: {
-      email,
-      password,
-    },
-    refetchQueries: [{ query: CURRENT_USER_QUERY }], // refetch user and update Nav
+  const [signup, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
+    variables: inputs,
   })
-
-  // Get error on auth failure
-  const error =
-    data?.authenticateUserWithPassword.__typename ===
-    'UserAuthenticationWithPasswordFailure'
-      ? data?.authenticateUserWithPassword
-      : undefined
-
-  console.log(error)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await signin()
+    await signup().catch(console.error)
     resetForm()
   }
 
   return (
     <Form method="POST" onSubmit={handleSubmit}>
+      <h2>Sign Up For An Account</h2>
+
       <ErrorMessage {...{ error }} />
 
       <fieldset disabled={loading}>
+        {data?.createUser && (
+          <p>
+            Signed up with {data.createUser.email} - Please Go Head and Sign in!
+          </p>
+        )}
+
+        <label htmlFor="name">
+          Your Name
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={name}
+            autoComplete="name"
+            onChange={handleChange}
+          ></input>
+        </label>
+
         <label htmlFor="email">
           Email
           <input
