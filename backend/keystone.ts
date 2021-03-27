@@ -29,6 +29,11 @@ const { withAuth } = createAuth({
   initFirstItem: {
     fields: ['name', 'email', 'password'],
   },
+  passwordResetLink: {
+    sendToken: async (args) => {
+      console.log('SEND TOKEN > ', args)
+    },
+  },
   // TODO: add in initla roles here
 })
 
@@ -66,7 +71,7 @@ export default withAuth(
     },
     session: withItemData(statelessSessions(sessionConfig), {
       // Graphql Query
-      User: `id name email`,
+      User: 'id name email',
     }),
   })
 )
