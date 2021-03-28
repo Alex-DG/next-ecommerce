@@ -8,8 +8,8 @@ export const User = list({
     name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
     password: password(),
-    card: relationship({
-      ref: 'CardItem.user',
+    cart: relationship({
+      ref: 'CartItem.user',
       many: true,
       ui: {
         createView: { fieldMode: 'hidden' },

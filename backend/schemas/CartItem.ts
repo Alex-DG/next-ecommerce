@@ -1,7 +1,7 @@
-import { integer, relationship, select, text } from '@keystone-next/fields'
+import { integer, relationship } from '@keystone-next/fields'
 import { list } from '@keystone-next/keystone/schema'
 
-export const CardItem = list({
+export const CartItem = list({
   ui: {
     // Create Default KeystoneJS UI column display
     listView: {
@@ -15,6 +15,6 @@ export const CardItem = list({
       isRequired: true,
     }),
     product: relationship({ ref: 'Product' }),
-    user: relationship({ ref: 'User.card' }),
+    user: relationship({ ref: 'User.cart' }),
   },
 })

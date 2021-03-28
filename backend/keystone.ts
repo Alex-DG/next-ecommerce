@@ -12,7 +12,7 @@ import { sendResetEmail } from './lib/mail'
 
 import { User } from './schemas/User'
 import { Product } from './schemas/Product'
-import { CardItem } from './schemas/CardItem'
+import { CartItem } from './schemas/CartItem'
 import { ProductImage } from './schemas/ProductImage'
 import { insertSeedData } from './seed-data'
 
@@ -64,7 +64,7 @@ export default withAuth(
       User,
       Product,
       ProductImage,
-      CardItem,
+      CartItem,
     }),
     ui: {
       // TODO: change this for roles
