@@ -8,6 +8,8 @@ import {
 import { config, createSchema } from '@keystone-next/keystone/schema'
 import 'dotenv/config'
 
+import { sendResetEmail } from './lib/mail'
+
 import { User } from './schemas/User'
 import { Product } from './schemas/Product'
 import { ProductImage } from './schemas/ProductImage'
@@ -31,7 +33,7 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     sendToken: async (args) => {
-      console.log('SEND TOKEN > ', args)
+      await sendResetEmail(args.token, args.identity)
     },
   },
   // TODO: add in initla roles here

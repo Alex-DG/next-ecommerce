@@ -34,7 +34,7 @@ const Reset = ({ token }) => {
   })
 
   // In that case we can have error from the the mutation return or this other case
-  const successfulError = data?.redeemUserPasswordResetToken.code
+  const successfulError = data?.redeemUserPasswordResetToken?.code
     ? data?.redeemUserPasswordResetToken
     : undefined
 
