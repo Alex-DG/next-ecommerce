@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import CartStyles from './styles/CartStyles'
+import CloseButton from './styles/CloseButton'
 import Supreme from './styles/Supreme'
 import formatMoney from '../lib/formatMoney'
 import calcTotalPrice from '../lib/calcTotalPrice'
 import { useUser } from './User'
+import { useCart } from '../lib/cartState'
 
 const CardItemStyles = styled.li`
   padding: 1rem 0;
@@ -26,7 +28,7 @@ const CardItem = ({ item }) => {
   const { name, id, photo, price } = product
 
   return (
-    <CardItemStyles key={id}>
+    <CardItemStyles>
       <img width="100" src={photo?.image.publicUrlTransformed} alt={name} />
       <div>
         <h3>{name}</h3>
@@ -43,20 +45,22 @@ const CardItem = ({ item }) => {
 
 const Cart = () => {
   const me = useUser()
+  const { cartOpen, closeCart } = useCart()
 
   if (!me) return null
 
   const { name, cart } = me
 
   return (
-    <CartStyles open>
+    <CartStyles open={cartOpen}>
       <header>
-        <Supreme>{name}</Supreme>
+        <Supreme>{name}'s Cart</Supreme>
+        <CloseButton onClick={closeCart}>&times;</CloseButton>
       </header>
 
       <ul>
         {me.cart.map((item) => {
-          return <CardItem {...{ item }} />
+          return <CardItem key={item.id} {...{ item }} />
         })}
       </ul>
 
