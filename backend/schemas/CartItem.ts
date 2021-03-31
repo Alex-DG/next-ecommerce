@@ -9,7 +9,7 @@ export const CartItem = list({
     },
   },
   fields: {
-    // TODO: custom label in here
+    // TODO: Custom Label in here
     quantity: integer({
       defaultValue: 1,
       isRequired: true,
