@@ -41,7 +41,6 @@ const Reset = ({ token }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await reset().catch(console.error)
-    console.log({ error })
     resetForm()
   }
 

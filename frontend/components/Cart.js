@@ -6,6 +6,7 @@ import formatMoney from '../lib/formatMoney'
 import calcTotalPrice from '../lib/calcTotalPrice'
 import { useUser } from './User'
 import { useCart } from '../lib/cartState'
+import RemoveFromtCart from './RemoveFromtCart'
 
 const CardItemStyles = styled.li`
   padding: 1rem 0;
@@ -24,8 +25,8 @@ const CardItemStyles = styled.li`
 const CardItem = ({ item }) => {
   if (!item.product) return null
 
-  const { quantity, product } = item
-  const { name, id, photo, price } = product
+  const { quantity, product, id } = item
+  const { name, photo, price } = product
 
   return (
     <CardItemStyles>
@@ -39,6 +40,7 @@ const CardItem = ({ item }) => {
           </em>
         </p>
       </div>
+      <RemoveFromtCart {...{ id }} />
     </CardItemStyles>
   )
 }
