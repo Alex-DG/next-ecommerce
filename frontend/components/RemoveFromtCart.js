@@ -21,10 +21,23 @@ const REMOVE_FROM_CART_MUTATION = gql`
   }
 `
 
+const update = (cache, payload) => {
+  // Cache.identify get the card item as `CardItem:id`
+  cache.evict(cache.identify(payload.data.deleteCartItem))
+}
+
 // Remove from cart by item id (/!\ item id is != from product id ;))
 const RemoveFromtCart = ({ id }) => {
   const [removeFromCart, { loading }] = useMutation(REMOVE_FROM_CART_MUTATION, {
     variables: { id },
+    update,
+    // TODO: at the moment it seems optimisticResponse is not working/there is bug with it, check their doc if they fix it in a future update. So for now I kept it commented
+    // optimisticResponse: {
+    //   deleteCartItem: {
+    //     __typename: 'CartItem',
+    //     id,
+    //   },
+    // },
   })
 
   return (
