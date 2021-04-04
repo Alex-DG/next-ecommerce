@@ -4,6 +4,7 @@
   "description": "Sick Fits! An example React, GraphQL, Next and Apollo",
   "main": "index.js",
   "scripts": {
+    "local": "yarn dev -H",
     "dev": "next -p 7777",
     "build": "next build",
     "start": "next start -p 7777",
