@@ -11,7 +11,7 @@ const addToCart = async (
 
   // Query the current user see if he is signed in
   if (!session.itemId) {
-    throw new Error('You must be logged in to do this')
+    throw new Error('Sorry! You must be logged in to do this')
   }
 
   // Query the current user  cart
