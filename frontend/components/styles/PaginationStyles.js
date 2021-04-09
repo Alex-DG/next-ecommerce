@@ -10,6 +10,7 @@ const PaginationStyles = styled.div`
   margin: 2rem 0;
   border: 1px solid var(--lightGrey);
   border-radius: 10px;
+
   & > * {
     margin: 0;
     padding: 15px 30px;
@@ -18,6 +19,7 @@ const PaginationStyles = styled.div`
       border-right: 0;
     }
   }
+
   a[aria-disabled='true'] {
     color: grey;
     pointer-events: none;
