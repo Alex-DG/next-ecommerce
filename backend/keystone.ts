@@ -13,6 +13,8 @@ import { sendResetEmail } from './lib/mail'
 import { User } from './schemas/User'
 import { Product } from './schemas/Product'
 import { CartItem } from './schemas/CartItem'
+import { Order } from './schemas/Order'
+import { OrderItem } from './schemas/OrderItem'
 import { ProductImage } from './schemas/ProductImage'
 import { insertSeedData } from './seed-data'
 import { extendGraphqlSchema } from './mutations'
@@ -61,11 +63,13 @@ export default withAuth(
       },
     },
     lists: createSchema({
-      // Schema items go in here
+      // Schema items go in here!!
       User,
       Product,
       ProductImage,
       CartItem,
+      OrderItem,
+      Order,
     }),
     extendGraphqlSchema,
     ui: {
