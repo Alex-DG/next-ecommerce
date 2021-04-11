@@ -14,6 +14,8 @@ import {
 import nProgress from 'nprogress'
 import SickButton from './styles/SickButton'
 import ErrorMessage from './ErrorMessage'
+import { useCart } from '../lib/cartState'
+import { CURRENT_USER_QUERY } from './User'
 
 const CheckouFormStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -41,13 +43,19 @@ const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
 
 const CheckoutForm = () => {
   const router = useRouter()
+  const { closeCart } = useCart()
   const [error, setError] = useState()
   const [loading, setLoading] = useState()
 
   const elements = useElements()
   const stripe = useStripe()
 
-  const [checkout, { error: graphQLError }] = useMutation(CREATE_ORDER_MUTATION)
+  const [checkout, { error: graphQLError }] = useMutation(
+    CREATE_ORDER_MUTATION,
+    {
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    }
+  )
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -82,6 +90,8 @@ const CheckoutForm = () => {
       pathname: '/order',
       query: { id: order.data.checkout.id },
     })
+
+    closeCart()
 
     setLoading(false)
     nProgress.done()
