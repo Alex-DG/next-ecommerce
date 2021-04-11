@@ -34,9 +34,12 @@ const SingleOrderPage = ({ query }) => {
   const { data, error, loading } = useQuery(SINGLE_ORDER_QUERY, {
     variables: { id: query.id },
   })
+
   if (loading) return <p>Loading...</p>
   if (error) return <ErrorMessage error={error} />
+
   const { order } = data
+
   return (
     <OrderStyles>
       <Head>
