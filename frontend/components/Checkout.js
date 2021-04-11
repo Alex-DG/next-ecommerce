@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
+import { useRouter } from 'next/dist/client/router'
 import { loadStripe } from '@stripe/stripe-js'
 import {
   Elements,
@@ -39,6 +40,7 @@ const CREATE_ORDER_MUTATION = gql`
 const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
 
 const CheckoutForm = () => {
+  const router = useRouter()
   const [error, setError] = useState()
   const [loading, setLoading] = useState()
 
@@ -74,6 +76,12 @@ const CheckoutForm = () => {
 
     console.log(`Finished with the order!`)
     console.log(order)
+
+    // Change the page to view the order
+    router.push({
+      pathname: '/order',
+      query: { id: order.data.checkout.id },
+    })
 
     setLoading(false)
     nProgress.done()
