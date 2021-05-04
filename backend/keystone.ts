@@ -10,6 +10,7 @@ import 'dotenv/config'
 
 import { sendResetEmail } from './lib/mail'
 
+import { Role } from './schemas/Role'
 import { User } from './schemas/User'
 import { Product } from './schemas/Product'
 import { CartItem } from './schemas/CartItem'
@@ -70,6 +71,7 @@ export default withAuth(
       CartItem,
       OrderItem,
       Order,
+      Role,
     }),
     extendGraphqlSchema,
     ui: {
