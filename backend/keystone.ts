@@ -17,6 +17,8 @@ import { CartItem } from './schemas/CartItem'
 import { Order } from './schemas/Order'
 import { OrderItem } from './schemas/OrderItem'
 import { ProductImage } from './schemas/ProductImage'
+import { permissionsList } from './schemas/fields'
+
 import { insertSeedData } from './seed-data'
 import { extendGraphqlSchema } from './mutations'
 
@@ -82,8 +84,8 @@ export default withAuth(
       },
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      // Graphql Query
-      User: 'id name email',
+      // Graphql Query data of the logged in user for every session
+      User: `id name email role { ${permissionsList.join(' ')} }`,
     }),
   })
 )
