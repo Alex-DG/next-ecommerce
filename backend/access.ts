@@ -1,4 +1,4 @@
-// import { permissionsList } from './schemas/fields';
+import { permissionsList } from './schemas/fields'
 import { ListAccessArgs } from './types'
 // At it's simplest, the access control returns a yes or no value depending on the users session
 
@@ -6,22 +6,23 @@ export const isSignedIn = ({ session }: ListAccessArgs) => {
   return !!session
 }
 
-// const generatedPermissions = Object.fromEntries(
-//   permissionsList.map((permission) => [
-//     permission,
-//     function ({ session }: ListAccessArgs) {
-//       return !!session?.data.role?.[permission];
-//     },
-//   ])
-// );
+const generatedPermissions = Object.fromEntries(
+  permissionsList.map((permission) => [
+    permission,
+    function ({ session }: ListAccessArgs) {
+      return !!session?.data.role?.[permission]
+    },
+  ])
+)
 
-// // Permissions check if someone meets a criteria - yes or no.
-// export const permissions = {
-//   ...generatedPermissions,
-//   isAwesome({ session }: ListAccessArgs): boolean {
-//     return session?.data.name.includes('wes');
-//   },
-// };
+// Permissions check if someone meets a criteria - yes or no.
+export const permissions = {
+  ...generatedPermissions,
+  // isAwesome: example of custom permission!
+  isAwesome({ session }: ListAccessArgs): boolean {
+    return session?.data.name.includes('alex')
+  },
+}
 
 // // Rule based function
 // // Rules can return a boolean - yes or no - or a filter which limits which products they can CRUD.
