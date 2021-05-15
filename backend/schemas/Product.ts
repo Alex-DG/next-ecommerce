@@ -1,6 +1,6 @@
 import { integer, relationship, select, text } from '@keystone-next/fields'
 import { list } from '@keystone-next/keystone/schema'
-import { isSignedIn, rules } from '../access'
+import { isSignedIn, permissions, rules } from '../access'
 
 export const Product = list({
   // Define access rules for Product
@@ -9,6 +9,9 @@ export const Product = list({
     read: rules.canReadProducts,
     update: rules.canManageProducts,
     delete: rules.canManageProducts,
+  },
+  ui: {
+    isHidden: (args) => !permissions.canSeeBackend(args),
   },
   fields: {
     name: text({ isRequired: true }),

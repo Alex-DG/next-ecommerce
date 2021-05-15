@@ -3,6 +3,10 @@ import { checkbox } from '@keystone-next/fields'
 // TODO: we may need a custom permission `canSeeBackend` so only admin can sign in
 // to the keystone backend dashboard
 export const permissionFields = {
+  // canSeeBackend: {
+  //   defaultValue: true,
+  //   label: 'User can see backend',
+  // },
   canManageProducts: checkbox({
     defaultValue: false,
     label: 'User can Update and delete any product',

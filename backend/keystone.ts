@@ -43,7 +43,7 @@ const { withAuth } = createAuth({
       await sendResetEmail(args.token, args.identity)
     },
   },
-  // TODO: add in initla roles here
+  // TODO: add initial roles here
 })
 
 export default withAuth(
@@ -77,12 +77,18 @@ export default withAuth(
     }),
     extendGraphqlSchema,
     ui: {
-      // TODO: change this for roles
-      isAccessAllowed: ({ session }) => {
-        console.log('[session]', { session })
-        return !!session?.data
+      isAccessAllowed: ({ session, endSession }) => {
+        console.log({ session })
+
+        const isSession = !!session?.data
+        const isRole = !!session?.data?.role // role is null for frontent customer
+
+        if (!isRole) endSession()
+
+        return isSession && isRole
       },
     },
+
     session: withItemData(statelessSessions(sessionConfig), {
       // Graphql Query data of the logged in user for every session
       User: `id name email role { ${permissionsList.join(' ')} }`,

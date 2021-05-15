@@ -1,6 +1,6 @@
 import { integer, relationship } from '@keystone-next/fields'
 import { list } from '@keystone-next/keystone/schema'
-import { isSignedIn, rules } from '../access'
+import { isSignedIn, permissions, rules } from '../access'
 
 export const CartItem = list({
   access: {
@@ -10,6 +10,8 @@ export const CartItem = list({
     delete: rules.canOrder,
   },
   ui: {
+    isHidden: (args) => !permissions.canSeeBackend(args),
+
     // Create Default KeystoneJS UI column display
     listView: {
       initialColumns: ['product', 'quantity', 'user'],

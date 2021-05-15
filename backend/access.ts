@@ -1,6 +1,8 @@
 import { permissionsList } from './schemas/fields'
 import { ListAccessArgs } from './types'
-// At it's simplest, the access control returns a yes or no value depending on the users session
+
+// At it's simplest, the access control returns a yes or no value
+// depending on the users session
 
 export const isSignedIn = ({ session }: ListAccessArgs) => {
   return !!session
@@ -22,9 +24,9 @@ export const permissions: any = {
   isAwesome({ session }: ListAccessArgs): boolean {
     return session?.data.name.includes('alex')
   },
-
-  // we may need a custom permission `canSeeBackend` so only admin can sign in
-  // to the keystone backend dashboard
+  canSeeBackend({ session }: ListAccessArgs): boolean {
+    return !!session?.data?.role
+  },
 }
 
 // Rule based function
